@@ -1,0 +1,28 @@
+# Entorno virtual de Python
+.venv/
+venv/
+ENV/
+env/
+.phsta/
+
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Checkpoints y archivos temporales de Jupyter Notebook
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+# Configuración local de VS Code
+.vscode/
+!.vscode/settings.json
+
+# Archivos pesados de datos generados por simulaciones (opcional si son muy grandes)
+# *.csv
+# *.npy
+# *.hdf5
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
