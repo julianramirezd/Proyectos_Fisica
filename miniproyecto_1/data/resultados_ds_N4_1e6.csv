@@ -1,0 +1,10 @@
+Intento,Configuracion,N_runs,Hits,Probabilidad_Estimada
+Intento 1,Configuración A,1000000,127,0.000127
+Intento 1,Configuración B,1000000,107,0.000107
+Intento 1,Configuración C,1000000,106,0.000106
+Intento 2,Configuración A,1000000,98,9.8e-05
+Intento 2,Configuración B,1000000,104,0.000104
+Intento 2,Configuración C,1000000,129,0.000129
+Intento 3,Configuración A,1000000,110,0.00011
+Intento 3,Configuración B,1000000,118,0.000118
+Intento 3,Configuración C,1000000,119,0.000119
