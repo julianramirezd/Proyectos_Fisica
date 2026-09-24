@@ -11,6 +11,7 @@ import random
 import pandas as pd
 
 
+
 def direct_disks_box(N, sigma):
     """Genera una configuración aleatoria no solapada de N discos de radio sigma.
     Retorna una lista de N tuplas [(x1, y1), ..., (xN, yN)] con las coordenadas

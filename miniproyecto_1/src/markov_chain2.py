@@ -9,12 +9,42 @@ Usado para los calculos de N=8
 import json
 import os
 import random
+import math
 import pandas as pd
+
+def direct_disks_box(N, sigma):
+    """Genera una configuración aleatoria no solapada de N discos de radio sigma.
+    Retorna una lista de N tuplas [(x1, y1), ..., (xN, yN)] con las coordenadas
+    de los centros de masa dentro de la caja unitaria.
+    """
+    condition = False  # Bandera de control para validar el muestreo completo sin solapamientos
+    
+    while not condition:
+        # Posiciona aleatoriamente el primer disco asegurando que no sobresalga de las paredes
+        L = [(random.uniform(sigma, 1.0 - sigma), random.uniform(sigma, 1.0 - sigma))]
+
+        # Intenta ubicar secuencialmente los N-1 discos restantes
+        for k in range(1, N):
+            # Propone un centro de masa aleatorio para el disco k
+            a = (random.uniform(sigma, 1.0 - sigma), random.uniform(sigma, 1.0 - sigma))
+
+            #Se calcula la distancia entre centros
+            min_dist = min(math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) for b in L)
+
+            # La distancia entre centros debe ser >= 2*sigma para evitar solapamientos 
+            if min_dist < 2.0 * sigma:
+                condition = False  # Solapamiento detectado: rechaza la configuración
+                break  # Abandona el intento actual y reinicia desde el primer disco
+            else:
+                L.append(a)  # Disco válido: se incorpora a la configuración
+                condition = True  # Marca la configuración como válida si se completa exitosamente los N discos
+
+    return L
 
 N = 8  # Número de discos rígidos (Cambiar a 8 para la segunda parte del punto 5)
 sigma = 0.10  # Radio físico de los discos
 sigma_sq = sigma**2  # Radio al cuadrado
-delta = 0.1  # Amplitud del desplazamiento aleatorio por paso (Paso Metropolis)
+delta = 0.05  # Amplitud del desplazamiento aleatorio por paso (Paso Metropolis)
 del_xy = 0.05  # Tolerancia espacial de las cajas rojas
 n_steps = int(1e6)  # Pasos de la cadena de Markov
 num_intentos = 3  # Número de repeticiones independientes
@@ -43,8 +73,8 @@ nombres_config = {
 datos_resultados = []
 
 for intento in range(1, num_intentos + 1):
-     # Posición inicial sin solapamiento para los 4 discos en el intento actual
-    L = [[0.25, 0.25], [0.75, 0.25], [0.25, 0.75], [0.75, 0.75]]
+     # Posición inicial sin solapamiento para los 8 discos en el intento actual
+    L = [list(p) for p in direct_disks_box(8, sigma)]
 
     # Reiniciar el contador de aciertos (hits) para este intento
     hits = {conf_a: 0, conf_b: 0, conf_c: 0}
@@ -87,3 +117,4 @@ for intento in range(1, num_intentos + 1):
 # Creación del DataFrame de Pandas
 df_hits = pd.DataFrame(datos_resultados)
 df_hits.to_csv("miniproyecto_1/data/resultados_mcmc_N8_1e6.csv", index=False, encoding="utf-8") #Cambiar el nombre para guardar los diferentes archivos guardados en /data
+

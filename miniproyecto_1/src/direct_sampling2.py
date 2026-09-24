@@ -46,7 +46,7 @@ def direct_disks_box(N, sigma):
 
 sigma = 0.10  # Radio físico de cada disco rígido (reducido para hacer mas rapido el calculo de los problemas)
 del_xy = 0.05  # Semi-ancho de la caja roja de tolerancia espacial
-n_runs = int(1e4)  # Número total de muestras independientes (Se modifico para los diferentes archivos )
+n_runs = int(1e6)  # Número total de muestras independientes (Se modifico para los diferentes archivos )
 n_intentos = 3 # Número de repeticiones por n_runs
 
 # Configuraciones geométricas de referencia 
@@ -113,4 +113,4 @@ for i in range(1, n_intentos + 1):
 
 # Creación del DataFrame de Pandas
 df_hits = pd.DataFrame(datos_resultados)
-df_hits.to_csv("miniproyecto_1/data/resultados_ds_N8_1e4.csv", index=False, encoding="utf-8") #Cambiar el nombre para guardar los diferentes archivos guardados en /data
+df_hits.to_csv("miniproyecto_1/data/resultados_ds_N8_1e6.csv", index=False, encoding="utf-8") #Cambiar el nombre para guardar los diferentes archivos guardados en /data
