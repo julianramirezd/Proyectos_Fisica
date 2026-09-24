@@ -41,8 +41,8 @@ def direct_disks_box(N, sigma):
 
     return L
 
-N = 8  # Número de discos rígidos (Cambiar a 8 para la segunda parte del punto 5)
-sigma = 0.10  # Radio físico de los discos
+N = 8  # Número de discos rígidos (Cambiar a 8)
+sigma = 0.0848  # Radio físico de los discos
 sigma_sq = sigma**2  # Radio al cuadrado
 delta = 0.05  # Amplitud del desplazamiento aleatorio por paso (Paso Metropolis)
 del_xy = 0.05  # Tolerancia espacial de las cajas rojas
